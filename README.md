@@ -26,11 +26,9 @@ Many popular WARP Docker images (like `caomingjun/warp`) rely on the official Cl
 You can seamlessly replace your existing WARP proxy. Just map port `1080` and give it `NET_ADMIN` privileges. Create a `docker-compose.yml`:
 
 ```yaml
-version: '3.8'
-
-services:
+vservices:
   microwarp:
-    image: ghcr.io/ccbkkb/microwarp:latest
+    image: ghcr.io/ccbkkb/MicroWARP:latest
     container_name: microwarp
     restart: always
     ports:
@@ -41,7 +39,7 @@ services:
     sysctls:
       - net.ipv4.conf.all.src_valid_mark=1
     volumes:
-      - warp-data:/etc/wireguard # Keep account data to avoid rate limits
+      - warp-data:/etc/wireguard # Keep account data
 
 volumes:
   warp-data:
@@ -49,7 +47,7 @@ volumes:
 
 Run the container:
 ```bash
-docker-compose up -d
+docker compose up -d
 ```
 
 Once running, configure your apps (Telegram, v2ray, Xray, AIzaSy) to use `socks5://127.0.0.1:1080`. Your traffic is now securely routed through Cloudflare's backbone!
@@ -82,7 +80,7 @@ Zero configuration required. On the first run, MicroWARP will automatically regi
 ```yaml
 services:
   microwarp:
-    image: ghcr.io/ccbkkb/microwarp:latest
+    image: ghcr.io/ccbkkb/MicroWARP:latest
     container_name: microwarp
     restart: always
     ports:
@@ -93,7 +91,7 @@ services:
     sysctls:
       - net.ipv4.conf.all.src_valid_mark=1
     volumes:
-      - warp-data:/etc/wireguard # 持久化保存账号凭证，防止重启触发风控
+      - warp-data:/etc/wireguard # 持久化保存账号凭证
 
 volumes:
   warp-data:
