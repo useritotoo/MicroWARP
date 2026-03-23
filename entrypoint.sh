@@ -82,7 +82,7 @@ if [ -n "$SOCKS_USER" ] && [ -n "$SOCKS_PASS" ]; then
     # 使用 exec 接管进程，实现 Zero-Overhead 的底层进程控制
     exec microsocks -i "$LISTEN_ADDR" -p "$LISTEN_PORT" -u "$SOCKS_USER" -P "$SOCKS_PASS"
 else
-    echo "==>[MicroWARP] ⚠️ 未设置密码，当前为公开访问模式"
+    echo "==> [MicroWARP] ⚠️ 未设置密码，当前为公开访问模式"
     echo "==>[MicroWARP] 🚀 MicroSOCKS 引擎已启动，正在监听 ${LISTEN_ADDR}:${LISTEN_PORT}"
     exec microsocks -i "$LISTEN_ADDR" -p "$LISTEN_PORT"
 fi
